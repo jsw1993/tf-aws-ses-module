@@ -17,7 +17,7 @@ resource "aws_route53_record" "dkim_records" {
 
 resource "aws_route53_record" "mail_from_mx" {
   zone_id = var.route53_zone_id
-  name    = aws_ses_domain_mail_from.mail_from.domain
+  name    = aws_ses_domain_mail_from.mail_from.mail_from_domain
   type    = "MX"
   ttl     = var.mail_from_mx_ttl
   records = ["10 feedback-smtp.${data.aws_region.current.name}.amazonses.com"]
@@ -25,7 +25,7 @@ resource "aws_route53_record" "mail_from_mx" {
 
 resource "aws_route53_record" "mail_from_txt" {
   zone_id = var.route53_zone_id
-  name    = aws_ses_domain_mail_from.mail_from.domain
+  name    = aws_ses_domain_mail_from.mail_from.mail_from_domain
   type    = "TXT"
   ttl     = var.mail_from_txt_ttl
   records = ["v=spf1 include:amazonses.com -all"]
